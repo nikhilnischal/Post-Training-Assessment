@@ -1,0 +1,32 @@
+Write a common use-case, where you will use a daemon set instead of replica set.
+
+DaemonSet ensures that one copy of pod always be present in all nodes in cluster.
+Use Cases - 
+1. Monitoring Agent
+2. Log Collection 
+3. Cluster Storage
+4. Networking
+
+>>>> Sample DaemonSet YAML file for Log Collection
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+  namespace: kube-system
+  labels:
+    app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+      name: fluentd-elasticsearch
+  template:
+    metadata:
+      labels:
+        name: fluentd-elasticsearch
+    spec:
+      containers:
+      - name: fluentd-elasticsearch
+        image: <<<image path>>>>
+
+
